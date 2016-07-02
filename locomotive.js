@@ -89,6 +89,14 @@ function Locomotive(){
                 self.estop('Operator triggered estop');
             }
 
+            // Horn?
+            if(pieces[0] == 'H') {
+                rpio.write(33, rpio.HIGH);
+                setTimeout(function() {
+                    rpio.write(33, rpio.LOW);
+                }, 1000);
+            }
+
         });
     });
     this.wsServer.listen(controlServerPort, function onWsListen () {
@@ -106,6 +114,9 @@ function Locomotive(){
         baudrate: 115200
     }, false);
     this.controllers.push(new Controller(c2Port, 2, this.wsServer));
+
+    // Set to the safe state
+    rpio.write(29, rpio.HIGH);
 
 }
 
