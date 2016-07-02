@@ -1,12 +1,33 @@
-var Controller = require('./controller.js');
+// Structure of breadboard
 
+// pi connector
+// 4x optoisoaltor
+// 4x transistor
+
+// GPIO PIN -> Action -> Pin number
+
+// 5 -> estopcommand -> 29
+// 6 -> brakecommand -> 31
+// 13 -> horncommand -> 33
+// 12 -> tetherinput  -> 32
+// 16 -> estopinput -> 36
+
+// TODO add rpio.LOW to estop function
+
+// Add the rpio library
+var rpio = require('rpio');
+rpio.open(29, rpio.OUTPUT, rpio.LOW);
+rpio.open(31, rpio.OUTPUT, rpio.LOW);
+rpio.open(33, rpio.OUTPUT, rpio.LOW);
+rpio.open(32, rpio.INPUT, rpio.LOW);
+rpio.open(36, rpio.INPUT, rpio.LOW);
+
+var Controller = require('./controller.js');
 var serialPort = require("serialport");
 var SerialPort = serialPort.SerialPort; // localize object constructor
 
 function Locomotive(){
 
-    // Stores the inteveral counter for the vac pump
-    this.pumpInterval = null;
     // Stores the brakes state
     this.brakes = true;
     // Stores the controller objects
@@ -68,11 +89,6 @@ function Locomotive(){
                 self.estop('Operator triggered estop');
             }
 
-            // Vac Pump
-            if(pieces[0] == 'P') {
-                console.log('Enabling 10sec vac pump');
-                self.triggerPump();
-            }
         });
     });
     this.wsServer.listen(controlServerPort, function onWsListen () {
@@ -95,16 +111,17 @@ function Locomotive(){
 
 Locomotive.prototype.setBrakes = function(enabled) {
     if(enabled) {
-        this.relay.write('b\n');
+        rpio.write(31, rpio.LOW);
         this.brakes = true;
         this.setSpeed(0);
     } else {
-        this.relay.write('a\n');
+        rpio.write(31, rpio.HIGH);
         this.brakes = false;
     }
-    this.triggerPump();
+    //this.triggerPump();
 }
 
+// Hack to trigger the vacuum pump
 Locomotive.prototype.triggerPump = function(time) {
     if(typeof time == undefined || time<0 || time > 100) {
         time == 10;
