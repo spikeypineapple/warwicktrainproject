@@ -97,6 +97,10 @@ var ws = new WebSocket("ws://"+location.hostname+":8001");
 var requestedSpeed = 0;
 ws.onopen = function (event) {
     $('p.status span').text('connected');
+    // Setup the heartbeat
+    setInteveral(function() {
+        ws.send('O'); // O for OK
+    }, 100);
 };
 ws.onmessage = function (event) {
     var data = event.data;
@@ -192,11 +196,6 @@ $('button.stopmotor').on('click', function() {
 
 var direction = true;
 
-$('button.pump').on('click', function() {
-    // Send the command to turn on the pump
-    ws.send('P');
-});
-
 var brakes = true;
 
 $('button.brakes').on('click', function() {
@@ -234,6 +233,11 @@ $('button.estop').on('click', function() {
     requestSpeed();
     $('span.currentValue').text(0);
     $('input.power').val(0);
+});
+
+$('button.horn').on('click', function() {
+    // Store that we are now in reverse
+    ws.send('H');
 });
 
 function updatePower() {
