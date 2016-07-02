@@ -20,7 +20,7 @@ var power = new JustGage({
   max: 1000,
   title: 'Power',
   defaults: dflt,
-  value: 832
+  value: 0
 })
 
 temps.push(new JustGage({
@@ -29,7 +29,7 @@ temps.push(new JustGage({
   max: 80,
   title: 'Cont1 Temp',
   defaults: dflt,
-  value: 23
+  value: 0
 }));
 temps.push(new JustGage({
   id: 'c2temp',
@@ -37,74 +37,9 @@ temps.push(new JustGage({
   max: 80,
   title: 'Cont2 Temp',
   defaults: dflt,
-  value: 22
+  value: 0
 
 }));
-temps.push(new JustGage({
-  id: 'fctemp',
-  min: 0,
-  max: 80,
-  title: 'FC Temp',
-  defaults: dflt,
-  value: 60
-
-}));
-temps.push(new JustGage({
-  id: 'dcdctemp',
-  min: 0,
-  max: 80,
-  title: 'DCDC Temp',
-  defaults: dflt,
-  value: 32
-}));
-temps.push(new JustGage({
-  id: 'm1temp',
-  min: 0,
-  max: 80,
-  title: 'M1 Temp',
-  defaults: dflt,
-  value: 28
-}));
-temps.push(new JustGage({
-  id: 'm2temp',
-  min: 0,
-  max: 80,
-  title: 'M2 Temp',
-  defaults: dflt,
-  value: 27
-}));
-temps.push(new JustGage({
-  id: 'm3temp',
-  min: 0,
-  max: 80,
-  title: 'M3 Temp',
-  defaults: dflt,
-  value: 29
-}));
-temps.push(new JustGage({
-  id: 'm4temp',
-  min: 0,
-  max: 80,
-  title: 'M4 Temp',
-  defaults: dflt,
-  value: 31
-}));
-/*
-temps.push(new JustGage({
-  id: 'c3temp',
-  min: 0,
-  max: 80,
-  title: 'C3 Temp',
-  defaults: dflt
-}));
-temps.push(new JustGage({
-  id: 'c4temp',
-  min: 0,
-  max: 80,
-  title: 'C4 Temp',
-  defaults: dflt
-}));
-*/
 var currents = new Array();
 currents.push(new JustGage({
   id: 'c1current',
@@ -112,7 +47,7 @@ currents.push(new JustGage({
   defaults: dflt,
   min: 0,
   max: 20,
-  value: 8
+  value: 0
 
 }));
 
@@ -122,7 +57,7 @@ currents.push(new JustGage({
   defaults: dflt,
   min: 0,
   max: 20,
-  value: 8
+  value: 0
 
 }));
 currents.push(new JustGage({
@@ -131,7 +66,7 @@ currents.push(new JustGage({
   defaults: dflt,
   min: 0,
   max: 20,
-  value: 8
+  value: 0
 
 }));
 
@@ -141,36 +76,19 @@ currents.push(new JustGage({
   defaults: dflt,
   min: 0,
   max: 20,
-  value: 8
+  value: 0
 
 }));
 
 var voltages = new Array();
 
 voltages.push(new JustGage({
-  id: 'fcvoltage',
-  title: 'FC Voltage',
-  defaults: dflt,
-  min: 0,
-  max: 50,
-  value: 38
-}));
-
-voltages.push(new JustGage({
-  id: 'ucvoltage',
-  title: 'UC Voltage',
-  defaults: dflt,
-  min: 0,
-  max: 60,
-  value: 34
-}));
-voltages.push(new JustGage({
   id: 'batvoltage',
   title: 'Batt Voltage',
   defaults: dflt,
   min: 0,
   max: 27,
-  value: 26
+  value: 0
 }));
 
 

@@ -1,7 +1,5 @@
 <html>
     <head>
-        <!-- Load c3.css -->
-        <link href="c3.min.css" rel="stylesheet" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.2, minimum-scale=1.2, maximum-scale=1.2, user-scalable=no">
         <!-- Load d3.js and c3.js -->
         <script src="js/raphael-2.1.4.min.js"></script>
@@ -12,18 +10,6 @@
     <body class="lock-position">
         <h1>Warwick Rail Challenge Controller</h1>
         <p class="status">Loco connection: <span class="value">connecting</span></p>
-        <div class="temp-guages">
-            <div id="c1temp" class="gauge"></div>
-            <div id="c2temp" class="gauge"></div>
-            <div id="fctemp" class="gauge"></div>
-            <div id="dcdctemp" class="gauge"></div>
-        </div>
-        <div class="temp-guages">
-            <div id="m1temp" class="gauge"></div>
-            <div id="m2temp" class="gauge"></div>
-            <div id="m3temp" class="gauge"></div>
-            <div id="m4temp" class="gauge"></div>
-        </div>
         <div class="current-guages">
             <div id="c1current" class="gauge"></div>
             <div id="c2current" class="gauge"></div>
@@ -31,8 +17,6 @@
             <div id="c4current" class="gauge"></div>
         </div>
         <div class="voltage-guages">
-            <div id="fcvoltage" class="gauge"></div>
-            <div id="ucvoltage" class="gauge"></div>
             <div id="batvoltage" class="gauge"></div>
             <div id="power" class="gauge"></div>
         </div>
@@ -43,7 +27,6 @@
         Controller 2 Status: <span class="controller2-status">Unknown...</span>
         <div class="control-wrapper">
             <button class="estop" style="background-color:red">E-Stop</button>
-            <button class="pump">Vacuum Pump</button>
             <button class="direction">Direction: <span class="direction">Forwards</span></button>
             <button class="brakes">Release Brakes</button>
             <button class="stopmotor">Stop Motor</button>
