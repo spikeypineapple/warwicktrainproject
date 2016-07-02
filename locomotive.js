@@ -15,6 +15,7 @@
 // TODO add rpio.LOW to estop function
 
 // Add the rpio library
+
 var rpio = require('rpio');
 rpio.open(29, rpio.OUTPUT, rpio.LOW);
 rpio.open(31, rpio.OUTPUT, rpio.LOW);
@@ -91,6 +92,7 @@ function Locomotive(){
 
             // Horn?
             if(pieces[0] == 'H') {
+                console.log('Triggering horn');
                 rpio.write(33, rpio.HIGH);
                 setTimeout(function() {
                     rpio.write(33, rpio.LOW);
@@ -99,6 +101,7 @@ function Locomotive(){
 
             if(pieces[0] == 'O') {
                 // Heartbeat signal
+                console.log('Got heartbeat at: '+Date.now());
                 this.safe = true;
             }
 
@@ -106,14 +109,8 @@ function Locomotive(){
     });
     this.wsServer.listen(controlServerPort, function onWsListen () {
         console.log('Control server started');
-        // Now start listening for the heartbeat
-        this.safe = true;
-        setInterval(function() {
-            if(!this.safe) {
-                this.estop('Heartbeat not received');
-            }
-            this.safe = false;
-        }, 150);
+        // TODO
+        //this.watchHeartbeat();
     });
 
     // Connect the two bogie motor controllers
@@ -131,6 +128,17 @@ function Locomotive(){
     // Set to the safe state
     rpio.write(29, rpio.HIGH);
 
+}
+
+Locomotive.prototype.watchHeartbeat = function() {
+    // Now start listening for the heartbeat
+    this.safe = true;
+    setInterval(function() {
+        if(!this.safe) {
+            this.estop('Heartbeat not received');
+        }
+        this.safe = false;
+    }, 150);
 }
 
 Locomotive.prototype.setBrakes = function(enabled) {
@@ -170,7 +178,7 @@ Locomotive.prototype.setSpeed = function(speed) {
 
 Locomotive.prototype.estop = function(reason) {
     this.setBrakes(true);
-    this.controller.setSpeed(0);
+    this.setSpeed(0);
     console.log('ESTOP triggered! Reason: '+reason);
 }
 
