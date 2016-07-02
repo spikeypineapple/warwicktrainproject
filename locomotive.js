@@ -97,10 +97,23 @@ function Locomotive(){
                 }, 1000);
             }
 
+            if(pieces[0] == 'O') {
+                // Heartbeat signal
+                this.safe = true;
+            }
+
         });
     });
     this.wsServer.listen(controlServerPort, function onWsListen () {
         console.log('Control server started');
+        // Now start listening for the heartbeat
+        this.safe = true;
+        setInterval(function() {
+            if(!this.safe) {
+                this.estop('Heartbeat not received');
+            }
+            this.safe = false;
+        }, 150);
     });
 
     // Connect the two bogie motor controllers
