@@ -1,0 +1,118 @@
+h1 {
+    margin-bottom: 0;
+}
+p.status {
+    margin: 0;
+}
+
+div.temp-guages >  div{
+    width: 120px;
+    height: 100px;
+    display: inline-block;
+    margin-right: 25px;
+}
+
+div.current-guages >  div{
+    width: 120px;
+    height: 100px;
+    display: inline-block;
+    margin-right: 25px;
+}
+
+div.voltage-guages >  div{
+    width: 120px;
+    height: 100px;
+    display: inline-block;
+    margin-right: 25px;
+}
+
+input.power {
+    position:absolute;
+   -webkit-transform: rotate(270deg);
+   top:250px;
+   right: -100px;
+   width: 400px;
+}
+
+span.speedValue {
+    position: absolute;
+    top: 4px;
+    right: 50px;
+}
+
+button {
+    height: 60px;
+    background-color: #565656;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    outline: none;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    display: block;
+}
+
+button:active {
+    background-color: black;
+}
+
+div.control-wrapper {
+    position: absolute;
+    top: 70px;
+    right: 150px;
+    width: 100px;
+}
+
+input[type=range]{
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background: red;
+    margin-top: -4px;
+    margin-left: -10px
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+body.lock-position {
+height: 100%;
+overflow: hidden;
+width: 100%;
+position: fixed;
+}
+
+span.led {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: red;
+    display: inline-block;
+}
+
+span.led.active {
+    background-color: #00FF00 !important;
+}
+
+body {
+    font-family: Tahoma, Geneva, sans-serif;
+}
