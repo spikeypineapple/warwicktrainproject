@@ -91,52 +91,6 @@ function Locomotive(){
     }, false);
     this.controllers.push(new Controller(c2Port, 2, this.wsServer));
 
-    // Connect to the relay arduino
-    this.relay = new SerialPort('/dev/ttyACM0', {
-        baudrate: 9600
-    }, false);
-    this.relay.open(function(error) {
-        if (error) {
-            console.log('Failed to connect to relay arduino with error: '+error);
-            process.exit();
-        } else {
-            console.log('Connected to relay arduino');
-        }
-    });
-
-    // Connect to the temperature arduino
-    this.temp = new SerialPort('/dev/ttyACM1', {
-        baudrate: 9600,
-        parser: serialport.parsers.readline('\n')
-    }, false);
-    this.temp.open(function(error) {
-        if (error) {
-            console.log('Failed to connect to temperature arduino with error: '+error);
-            process.exit();
-        } else {
-            console.log('Connected to temperature Arduino');
-            var self = this;
-            this.temp.on('data', function getTempData (data) {
-                // Handle the incomming data and send to the Controller
-                var pieces = data.split(':');
-                if(pieces[0] != 'T') {
-                    // Invalid data received
-                    return;
-                } else {
-                    // Data looks good, send the controller
-                    self.wsServer.connections.forEach(function (conn) {
-                        conn.sendText(data);
-                    });
-                    // Check for limits
-                    if(pieces[2] > 80 || pieces[2] < -10) {
-                        // Unsafe limits
-                        self.estop('Unsafe temperature, component: '+pieces[1]+' with temp: '+pieces[2]);
-                    }
-                }
-            });
-        }
-    });
-
 }
 
 Locomotive.prototype.setBrakes = function(enabled) {
